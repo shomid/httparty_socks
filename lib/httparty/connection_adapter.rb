@@ -219,13 +219,24 @@ module HTTParty
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
         end
 
+        if options[:crt]
+          http.cert = OpenSSL::X509::Certificate.new(options[:crt])
+        end
+
         # Client certificate authentication
         # Note: options[:pem] must contain the content of a PEM file having the private key appended
         if options[:pem]
-          http.cert = OpenSSL::X509::Certificate.new(options[:pem])
-          http.key = OpenSSL::PKey.read(options[:pem], options[:pem_password])
+          http.key = OpenSSL::PKey::RSA.new(options[:pem], options[:pem_password])
           http.verify_mode = verify_ssl_certificate? ? OpenSSL::SSL::VERIFY_PEER : OpenSSL::SSL::VERIFY_NONE
         end
+
+        # # Client certificate authentication
+        # # Note: options[:pem] must contain the content of a PEM file having the private key appended
+        # if options[:pem]
+        #   http.cert = OpenSSL::X509::Certificate.new(options[:pem])
+        #   http.key = OpenSSL::PKey.read(options[:pem], options[:pem_password])
+        #   http.verify_mode = verify_ssl_certificate? ? OpenSSL::SSL::VERIFY_PEER : OpenSSL::SSL::VERIFY_NONE
+        # end
 
         # PKCS12 client certificate authentication
         if options[:p12]
