@@ -99,6 +99,7 @@ module HTTParty
     def connection
       host = clean_host(uri.host)
       port = uri.port || (uri.scheme == 'https' ? 443 : 80)
+      puts options.to_json
       if options.key?(:http_proxyaddr)
         http = Net::HTTP.new(
           host,
@@ -109,6 +110,7 @@ module HTTParty
           options[:http_proxypass]
         )
       elsif options[:socks_proxyaddr] && options[:socks_proxyport]
+        puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
         http = Net::HTTP::SOCKSProxy(options[:socks_proxyaddr], options[:socks_proxyport]).new(uri.host, uri.port)
       else  
         http = Net::HTTP.new(host, port)
