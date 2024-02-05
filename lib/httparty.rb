@@ -8,6 +8,7 @@ require 'multi_xml'
 require 'mini_mime'
 require 'json'
 require 'csv'
+require 'socksify/http'
 
 require 'httparty/module_inheritable_attributes'
 require 'httparty/cookie_hash'
