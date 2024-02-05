@@ -108,7 +108,9 @@ module HTTParty
           options[:http_proxyuser],
           options[:http_proxypass]
         )
-      else
+      elsif options[:socks_proxyaddr] && options[:socks_proxyport]
+        http = Net::HTTP::SOCKSProxy(options[:socks_proxyaddr], options[:socks_proxyport]).new(uri.host, uri.port)
+      else  
         http = Net::HTTP.new(host, port)
       end
 
