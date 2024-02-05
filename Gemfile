@@ -4,6 +4,7 @@ gemspec
 gem 'rake'
 gem 'mongrel',  '1.2.0.pre2'
 gem 'json'
+gem 'socksify', git: "https://github.com/astro/socksify-ruby.git", ref: 'v1.7.2'
 
 group :development do
   gem 'guard'
